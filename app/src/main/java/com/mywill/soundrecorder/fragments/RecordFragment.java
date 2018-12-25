@@ -1,10 +1,14 @@
 package com.mywill.soundrecorder.fragments;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,37 +111,39 @@ public class RecordFragment extends Fragment {
     // Recording Start/Stop
     //TODO: recording pause
     private void onRecord(boolean start){
+        if (!checkPermissionFromDevice()){
+          requestPermissionFromDevice();
+        }else {
+          Intent intent = new Intent(getActivity(), RecordingService.class);
 
-        Intent intent = new Intent(getActivity(), RecordingService.class);
-
-        if (start) {
+          if (start) {
             // start recording
             mRecordButton.setImageResource(R.drawable.ic_media_stop);
             //mPauseButton.setVisibility(View.VISIBLE);
             Toast.makeText(getActivity(),R.string.toast_recording_start,Toast.LENGTH_SHORT).show();
             File folder = new File(Environment.getExternalStorageDirectory() + "/SoundRecorder");
             if (!folder.exists()) {
-                //folder /SoundRecorder doesn't exist, create the folder
-                folder.mkdir();
+              //folder /SoundRecorder doesn't exist, create the folder
+              folder.mkdir();
             }
 
             //start Chronometer
             mChronometer.setBase(SystemClock.elapsedRealtime());
             mChronometer.start();
             mChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-                @Override
-                public void onChronometerTick(Chronometer chronometer) {
-                    if (mRecordPromptCount == 0) {
-                        mRecordingPrompt.setText(getString(R.string.record_in_progress) + ".");
-                    } else if (mRecordPromptCount == 1) {
-                        mRecordingPrompt.setText(getString(R.string.record_in_progress) + "..");
-                    } else if (mRecordPromptCount == 2) {
-                        mRecordingPrompt.setText(getString(R.string.record_in_progress) + "...");
-                        mRecordPromptCount = -1;
-                    }
-
-                    mRecordPromptCount++;
+              @Override
+              public void onChronometerTick(Chronometer chronometer) {
+                if (mRecordPromptCount == 0) {
+                  mRecordingPrompt.setText(getString(R.string.record_in_progress) + ".");
+                } else if (mRecordPromptCount == 1) {
+                  mRecordingPrompt.setText(getString(R.string.record_in_progress) + "..");
+                } else if (mRecordPromptCount == 2) {
+                  mRecordingPrompt.setText(getString(R.string.record_in_progress) + "...");
+                  mRecordPromptCount = -1;
                 }
+
+                mRecordPromptCount++;
+              }
             });
 
             //start RecordingService
@@ -148,7 +154,7 @@ public class RecordFragment extends Fragment {
             mRecordingPrompt.setText(getString(R.string.record_in_progress) + ".");
             mRecordPromptCount++;
 
-        } else {
+          } else {
             //stop recording
             mRecordButton.setImageResource(R.drawable.ic_mic_white_36dp);
             //mPauseButton.setVisibility(View.GONE);
@@ -160,7 +166,9 @@ public class RecordFragment extends Fragment {
             getActivity().stopService(intent);
             //allow the screen to turn off again once recording is finished
             getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+          }
         }
+
     }
 
     //TODO: implement pause recording
@@ -181,4 +189,15 @@ public class RecordFragment extends Fragment {
             mChronometer.start();
         }
     }
+  private boolean checkPermissionFromDevice() {
+    int storage_permission= ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    int recorder_permssion= ContextCompat.checkSelfPermission(getContext(),Manifest.permission.RECORD_AUDIO);
+    return storage_permission == PackageManager.PERMISSION_GRANTED && recorder_permssion == PackageManager.PERMISSION_GRANTED;
+  }
+  private void requestPermissionFromDevice() {
+    ActivityCompat.requestPermissions(getActivity(),new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.RECORD_AUDIO},
+        1);
+  }
 }

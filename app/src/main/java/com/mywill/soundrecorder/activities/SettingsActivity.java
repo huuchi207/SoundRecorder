@@ -12,7 +12,7 @@ import com.mywill.soundrecorder.fragments.SettingsFragment;
  * Created by Daniel on 5/22/2017.
  */
 
-public class SettingsActivity extends android.support.v7.app.ActionBarActivity {
+public class SettingsActivity extends android.support.v7.app.AppCompatActivity {
 
 
   @Override
