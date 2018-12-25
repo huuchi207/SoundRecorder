@@ -37,21 +37,6 @@ public class PurchaseFragment extends android.app.Fragment implements PurchasesU
   @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-      mBillingClient = BillingClient.newBuilder(getActivity()).setListener(this).build();
-      mBillingClient.startConnection(new BillingClientStateListener() {
-        @Override
-        public void onBillingSetupFinished(@BillingClient.BillingResponse int billingResponseCode) {
-          if (billingResponseCode == BillingClient.BillingResponse.OK) {
-            // The billing client is ready. You can query purchases here.
-          }
-        }
-        @Override
-        public void onBillingServiceDisconnected() {
-          // Try to restart the connection on the next request to
-          // Google Play by calling the startConnection() method.
-        }
-      });
     }
     private void getProductList(){
     String[] list= {"10_days_using", "10_days_using_high_quality_record",
@@ -118,7 +103,22 @@ public class PurchaseFragment extends android.app.Fragment implements PurchasesU
     });
     mRecyclerView.setAdapter(adapter);
 
-    getProductList();
+
+    mBillingClient = BillingClient.newBuilder(getActivity()).setListener(this).build();
+    mBillingClient.startConnection(new BillingClientStateListener() {
+      @Override
+      public void onBillingSetupFinished(@BillingClient.BillingResponse int billingResponseCode) {
+        if (billingResponseCode == BillingClient.BillingResponse.OK) {
+          // The billing client is ready. You can query purchases here.
+          getProductList();
+        }
+      }
+      @Override
+      public void onBillingServiceDisconnected() {
+        // Try to restart the connection on the next request to
+        // Google Play by calling the startConnection() method.
+      }
+    });
     return v;
   }
 

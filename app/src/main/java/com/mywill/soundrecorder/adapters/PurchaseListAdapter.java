@@ -36,7 +36,7 @@ public class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
       final SkuDetails skuDetails = mData.get(position);
         holder.tvTitle.setText(skuDetails.getTitle());
-        holder.tvContent.setText(skuDetails.getDescription());
+//        holder.tvContent.setText(skuDetails.getDescription());
         holder.tvPrice.setText(skuDetails.getPrice());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -57,12 +57,12 @@ public class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle, tvContent, tvPrice;
+        TextView tvTitle, tvPrice;
 
         ViewHolder(View itemView) {
             super(itemView);
           tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
-          tvContent = (TextView)itemView.findViewById(R.id.tvContent);
+//          tvContent = (TextView)itemView.findViewById(R.id.tvContent);
           tvPrice = (TextView)itemView.findViewById(R.id.tvPrice);
         }
 
