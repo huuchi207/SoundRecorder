@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import com.mywill.soundrecorder.R;
+import com.mywill.soundrecorder.fragments.PurchaseFragment;
 import com.mywill.soundrecorder.fragments.SettingsFragment;
 
 /**
@@ -29,11 +30,17 @@ public class SettingsActivity extends android.support.v7.app.AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, new SettingsFragment())
-                .commit();
+        if (getIntent()!= null && getIntent().getBooleanExtra("openPurchaseFragment", false)){
+          getFragmentManager()
+              .beginTransaction()
+              .replace(R.id.container, new PurchaseFragment())
+              .commit();
+        } else {
+          getFragmentManager()
+              .beginTransaction()
+              .replace(R.id.container, new SettingsFragment())
+              .commit();
+        }
 
 
     }

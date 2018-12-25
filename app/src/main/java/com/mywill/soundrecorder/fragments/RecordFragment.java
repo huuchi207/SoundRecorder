@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 import com.mywill.soundrecorder.R;
 import com.mywill.soundrecorder.RecordingService;
+import com.mywill.soundrecorder.activities.SettingsActivity;
 
 import java.io.File;
 
@@ -50,7 +51,7 @@ public class RecordFragment extends Fragment {
 
     private Chronometer mChronometer = null;
     long timeWhenPaused = 0; //stores time when user clicks pause button
-
+    private FloatingActionButton mUpgradeButton;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -105,6 +106,15 @@ public class RecordFragment extends Fragment {
             }
         });
 
+        mUpgradeButton = (FloatingActionButton) recordView.findViewById(R.id.btnUpgrade);
+        mUpgradeButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Intent i = new Intent(getActivity(), SettingsActivity.class);
+            i.putExtra("openPurchaseFragment",true);
+            startActivity(i);
+          }
+        });
         return recordView;
     }
 

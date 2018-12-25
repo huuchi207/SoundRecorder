@@ -10,7 +10,7 @@
     android:layout_alignParentLeft="true"
     android:layout_centerVertical="true"
     android:layout_marginLeft="5dp"
-    android:layout_marginRight=" "
+    android:layout_marginRight="5dp"
     android:layout_toLeftOf="@+id/tvPrice"
     android:text="dfsfdsfdsfdsfdsfdsfssdfdsfdsfdsf f ds sd sdf dsf sdf sdff"
     android:textSize="13sp"

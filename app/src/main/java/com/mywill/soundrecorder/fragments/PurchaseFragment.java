@@ -1,5 +1,6 @@
 package com.mywill.soundrecorder.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,7 +30,7 @@ import java.util.List;
  * Created by Daniel on 5/22/2017.
  */
 
-public class PurchaseFragment extends android.app.Fragment implements PurchasesUpdatedListener {
+public class PurchaseFragment extends Fragment implements PurchasesUpdatedListener {
   private BillingClient mBillingClient;
   private RecyclerView mRecyclerView;
   private PurchaseListAdapter adapter;
