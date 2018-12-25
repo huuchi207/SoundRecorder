@@ -1,4 +1,4 @@
-package com.danielkim.soundrecorder.fragments;
+package com.mywill.soundrecorder.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.danielkim.soundrecorder.R;
-import com.danielkim.soundrecorder.RecordingService;
 import com.melnykov.fab.FloatingActionButton;
+import com.mywill.soundrecorder.R;
+import com.mywill.soundrecorder.RecordingService;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package com.danielkim.soundrecorder;
+package com.mywill.soundrecorder;
 
 import android.content.Context;
 import android.content.SharedPreferences;

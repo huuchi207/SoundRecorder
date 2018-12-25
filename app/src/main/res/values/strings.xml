@@ -51,5 +51,8 @@
     <string name="pref_about_key">pref_about</string>
     <string name="pref_about_title">About</string>
     <string name="pref_about_desc">v%s</string>
+  <string name="pref_upgrade">Upgrade</string>
+  <string name="txt_upgrade">Upgrade</string>
+  <string name="txt_upgrade_summary">Upgrade your application</string>
 
 </resources>

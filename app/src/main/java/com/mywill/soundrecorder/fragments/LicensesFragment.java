@@ -1,4 +1,4 @@
-package com.danielkim.soundrecorder.fragments;
+package com.mywill.soundrecorder.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,7 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.danielkim.soundrecorder.R;
+import com.mywill.soundrecorder.R;
 
 /**
  * Created by Daniel on 1/3/2015.

@@ -1,4 +1,4 @@
-package com.danielkim.soundrecorder.fragments;
+package com.mywill.soundrecorder.fragments;
 
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -6,10 +6,9 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 
-import com.danielkim.soundrecorder.BuildConfig;
-import com.danielkim.soundrecorder.MySharedPreferences;
-import com.danielkim.soundrecorder.R;
-import com.danielkim.soundrecorder.activities.SettingsActivity;
+import com.mywill.soundrecorder.BuildConfig;
+import com.mywill.soundrecorder.MySharedPreferences;
+import com.mywill.soundrecorder.R;
 
 /**
  * Created by Daniel on 5/22/2017.
@@ -21,7 +20,8 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        CheckBoxPreference highQualityPref = (CheckBoxPreference) findPreference(getResources().getString(R.string.pref_high_quality_key));
+        CheckBoxPreference highQualityPref = (CheckBoxPreference) findPreference(getResources()
+            .getString(R.string.pref_high_quality_key));
         highQualityPref.setChecked(MySharedPreferences.getPrefHighQuality(getActivity()));
         highQualityPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -36,10 +36,23 @@ public class SettingsFragment extends PreferenceFragment {
         aboutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                LicensesFragment licensesFragment = new LicensesFragment();
-                licensesFragment.show(((SettingsActivity)getActivity()).getSupportFragmentManager().beginTransaction(), "dialog_licenses");
+//                LicensesFragment licensesFragment = new LicensesFragment();
+//                licensesFragment.show(((SettingsActivity)getActivity()).getSupportFragmentManager().beginTransaction(), "dialog_licenses");
                 return true;
             }
         });
+
+      Preference upgrade = findPreference(getString(R.string.pref_upgrade));
+      upgrade.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+          getFragmentManager()
+              .beginTransaction()
+              .replace(R.id.container, new PurchaseFragment())
+              .commit();
+          return true;
+        }
+      });
     }
+
 }
