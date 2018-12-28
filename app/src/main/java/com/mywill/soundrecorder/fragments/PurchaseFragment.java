@@ -40,8 +40,12 @@ public class PurchaseFragment extends Fragment implements PurchasesUpdatedListen
         super.onCreate(savedInstanceState);
     }
     private void getProductList(){
-    String[] list= {"10_days_using", "10_days_using_high_quality_record",
-    "10_records_storage", "5_days_using", "7_days_using", "7_days_using_high_quality_record","8_records_storage"};
+    String[] list= {"10_days_using",
+        "10_days_using_high_quality_record",
+    "10_records_storage",
+        "5_days_using", "7_days_using",
+        "7_days_using_high_quality_record",
+        "8_records_storage", "add_5_records_storage", "add_6_records_storage"};
       List<String> skuList = Arrays.asList(list);
       SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
       params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
