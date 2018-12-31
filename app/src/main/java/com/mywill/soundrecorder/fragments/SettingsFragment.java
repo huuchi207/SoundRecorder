@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import com.mywill.soundrecorder.BuildConfig;
 import com.mywill.soundrecorder.MySharedPreferences;
 import com.mywill.soundrecorder.R;
+import com.mywill.soundrecorder.activities.SettingsActivity;
 
 /**
  * Created by Daniel on 5/22/2017.
@@ -36,8 +37,8 @@ public class SettingsFragment extends PreferenceFragment {
         aboutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-//                LicensesFragment licensesFragment = new LicensesFragment();
-//                licensesFragment.show(((SettingsActivity)getActivity()).getSupportFragmentManager().beginTransaction(), "dialog_licenses");
+                LicensesFragment licensesFragment = new LicensesFragment();
+                licensesFragment.show(getActivity().getFragmentManager().beginTransaction(), "dialog_licenses");
                 return true;
             }
         });
