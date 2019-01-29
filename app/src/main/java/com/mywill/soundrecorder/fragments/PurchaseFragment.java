@@ -46,7 +46,11 @@ public class PurchaseFragment extends Fragment implements PurchasesUpdatedListen
         "5_days_using", "7_days_using",
         "7_days_using_high_quality_record",
         "8_records_storage", "add_5_records_storage", "add_6_records_storage",
-        "reserved_product_id_1", "reserved_product_id_2","reserved_product_id_3"};
+        "reserved_product_id_1", "reserved_product_id_2","reserved_product_id_3",
+         "reserved_product_id_4", "reserved_product_id_5","reserved_product_id_6",
+         "reserved_product_id_7", "reserved_product_id_8","reserved_product_id_9",
+
+    };
       List<String> skuList = Arrays.asList(list);
       SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
       params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
